@@ -9,6 +9,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.example.myapplication.data.types.Result
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
 
@@ -28,8 +30,7 @@ class HomeViewModel @Inject constructor(private val repository: CountryRepo, val
             viewModelState.value
         )
 
-    init {
-        print("Fetching country")
+    fun init () {
         fetchCountries()
     }
 
