@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.example.myapplication.data.types.Result
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
 
 data class HomeViewModelState(
@@ -16,7 +17,7 @@ data class HomeViewModelState(
 )
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val repository: CountryRepo) : ViewModel() {
+class HomeViewModel @Inject constructor(private val repository: CountryRepo, val dispatcher: CoroutineDispatcher = Dispatchers.IO) : ViewModel() {
     private val viewModelState = MutableStateFlow(HomeViewModelState())
 
     // UI state exposed to the UI
@@ -28,12 +29,13 @@ class HomeViewModel @Inject constructor(private val repository: CountryRepo) : V
         )
 
     init {
+        print("Fetching country")
         fetchCountries()
     }
 
     private fun fetchCountries() {
         viewModelScope.launch {
-            repository.getCountries().flowOn(Dispatchers.IO).collect { result ->
+            repository.getCountries().flowOn(dispatcher).collect { result ->
                 viewModelState.update { it.copy(countriesFeed = result) }
             }
         }

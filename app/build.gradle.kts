@@ -166,6 +166,12 @@ dependencies {
     val timberVersion = rootProject.extra["timber_version"]
     implementation("com.jakewharton.timber:timber:$timberVersion")
 
+    // Coroutine Testing
+    testImplementation(libs.androidx.test.core)
+    val coroutineVersion = rootProject.extra["coroutine_version"]
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutineVersion")
+    testImplementation("org.mockito:mockito-core:3.3.3")
+
     // Robolectric dependencies
     testImplementation(libs.androidx.compose.ui.test.junit4)
     testImplementation(libs.robolectric)

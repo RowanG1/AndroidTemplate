@@ -22,6 +22,7 @@ buildscript {
         set("gson_version", "2.8.9")
         set("timber_version", "4.7.1")
         set("lifecycle_version", "2.6.0-beta01")
+        set("coroutine_version", "1.6.4")
     }
     repositories {
         google()
