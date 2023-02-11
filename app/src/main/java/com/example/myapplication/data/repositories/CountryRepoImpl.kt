@@ -5,8 +5,9 @@ import com.example.myapplication.domain.repositories.CountryRepo
 import kotlinx.coroutines.flow.flow
 import com.example.myapplication.data.types.Result
 import com.example.myapplication.domain.models.Country
+import javax.inject.Inject
 
-class CountryRepoImpl (private val apiService: ApiService): CountryRepo {
+class CountryRepoImpl @Inject constructor(private val apiService: ApiService): CountryRepo {
     override suspend fun getCountries() = flow {
         emit(Result.Loading)
         try {
