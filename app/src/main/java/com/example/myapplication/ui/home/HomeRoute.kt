@@ -5,10 +5,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-//import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.myapplication.Greeting
 import com.example.myapplication.data.types.Result
 
