@@ -47,7 +47,7 @@ class HomeViewModelTest {
             }
         )
 
-        val viewModel = HomeViewModel(countryRepo, Dispatchers.Main)
+        val viewModel = HomeViewModel(countryRepo, UnconfinedTestDispatcher(testScheduler))
 
         val emitted = mutableListOf<HomeViewModelState>()
         val collectJob = launch(UnconfinedTestDispatcher(testScheduler)) {
