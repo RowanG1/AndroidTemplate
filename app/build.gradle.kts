@@ -31,6 +31,7 @@ android {
         versionName = "1.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "API_BASE_URL", "")
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -68,6 +69,23 @@ android {
             isIncludeAndroidResources = true
         }
     }
+
+    flavorDimensions += "environment"
+    productFlavors {
+        create("dev") {
+            dimension = "environment"
+            applicationIdSuffix = ".dev"
+            buildConfigField("String", "API_BASE_URL", "\"x.x.x.com/v1/dev\"")
+            versionNameSuffix = "-dev"
+        }
+        create("prod") {
+            dimension = "environment"
+            applicationIdSuffix = ".prod"
+            versionNameSuffix = "-prod"
+            buildConfigField("String", "API_BASE_URL", "\"https://x.x.x.com/v1/prod\"")
+        }
+    }
+
 
     // Tests can be Robolectric or instrumented tests
     sourceSets {

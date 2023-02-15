@@ -9,10 +9,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.example.myapplication.data.types.Result
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedInject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.*
+import timber.log.Timber
 
 data class HomeViewModelState(
     val countriesFeed: Result<List<Country>>? = null,
@@ -35,6 +34,7 @@ class HomeViewModel @Inject constructor(private val repository: CountryRepo, val
     }
 
     private fun fetchCountries() {
+        Timber.i("Fetching countries.")
         viewModelScope.launch {
             repository.getCountries().flowOn(dispatcher).collect { result ->
                 viewModelState.update { it.copy(countriesFeed = result) }
