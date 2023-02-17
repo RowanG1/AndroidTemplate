@@ -1,24 +1,22 @@
-/*
- * Copyright 2020 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+}
+
+val detekt by configurations.creating
+
+val detektTask = tasks.register<JavaExec>("detekt") {
+    main = "io.gitlab.arturbosch.detekt.cli.Main"
+    classpath = detekt
+
+    val input = projectDir
+    val config = "$projectDir/detekt.yml"
+    val exclude = ".*/build/.*,.*/resources/.*"
+    val params = listOf("-i", input, "-c", config, "-ex", exclude)
+
+    args(params)
 }
 
 android {
@@ -184,6 +182,9 @@ dependencies {
     val timberVersion = rootProject.extra["timber_version"]
     implementation("com.jakewharton.timber:timber:$timberVersion")
 
+    // Static code analysis
+    detekt("io.gitlab.arturbosch.detekt:detekt-cli:1.22.0")
+
     // Coroutine Testing
     testImplementation(libs.androidx.test.core)
     val coroutineVersion = rootProject.extra["coroutine_version"]
@@ -201,4 +202,8 @@ kapt {
 
 tasks.withType<Test>().configureEach {
     systemProperties.put("robolectric.logging", "stdout")
-} 
+}
+
+tasks.check {
+    dependsOn(detektTask)
+}
