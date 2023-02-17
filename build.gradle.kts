@@ -36,8 +36,6 @@ buildscript {
         classpath(libs.android.gradlePlugin)
         classpath(libs.kotlin.gradlePlugin)
     }
-
-
 }
 
 subprojects {
@@ -51,6 +49,7 @@ plugins {
     id("com.github.ben-manes.versions") version "0.43.0"
     id("nl.littlerobots.version-catalog-update") version "0.7.0"
     id("com.google.dagger.hilt.android") version "2.44" apply false
+    id("org.jlleitschuh.gradle.ktlint") version "11.1.0"
 }
 
 apply("${project.rootDir}/buildscripts/toml-updater-config.gradle")
