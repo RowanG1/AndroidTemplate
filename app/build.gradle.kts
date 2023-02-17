@@ -197,16 +197,20 @@ dependencies {
     // Robolectric dependencies
     testImplementation(libs.androidx.compose.ui.test.junit4)
     testImplementation(libs.robolectric)
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.2")
 }
 
 kapt {
     correctErrorTypes = true
 }
 
-tasks.withType<Test>().configureEach {
+tasks.withType<Test> {
     systemProperties.put("robolectric.logging", "stdout")
+}
 
-    useJUnitPlatform()
+tasks.withType<Test>().configureEach {
     testLogging {
         lifecycle {
             events = mutableSetOf(TestLogEvent.FAILED, TestLogEvent.PASSED, TestLogEvent.SKIPPED)
