@@ -207,6 +207,7 @@ kapt {
 }
 
 tasks.withType<Test> {
+    useJUnit()
     systemProperties.put("robolectric.logging", "stdout")
 }
 
