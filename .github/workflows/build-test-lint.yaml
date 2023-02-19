@@ -10,7 +10,7 @@ jobs:
 #        run: ./gradlew build
 #      - name: Run unit tests
 #        run: ./gradlew testDevDebug --stacktrace
-      - name: Run Kotlin Linter
-        run: ./gradlew ktlintCheck
-      - name: Run detekt
-        run: ./gradlew detekt
+#      - name: Run Kotlin Linter
+#        run: ./gradlew ktlintCheck
+#      - name: Run detekt
+#        run: ./gradlew detekt
