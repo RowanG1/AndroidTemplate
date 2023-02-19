@@ -35,6 +35,8 @@ buildscript {
     dependencies {
         classpath(libs.android.gradlePlugin)
         classpath(libs.kotlin.gradlePlugin)
+        classpath("com.google.gms:google-services:4.3.15")
+
     }
 }
 

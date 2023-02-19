@@ -6,6 +6,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
 }
 
 val detekt by configurations.creating
@@ -41,24 +42,23 @@ android {
         }
     }
 
-//    signingConfigs {
-//        // We use a bundled debug keystore, to allow debug builds from CI to be upgradable
-//        named("debug") {
-//            storeFile = rootProject.file("debug.keystore")
-//            storePassword = "android"
-//            keyAlias = "androiddebugkey"
-//            keyPassword = "android"
-//        }
-//    }
+    signingConfigs {
+        // We use a bundled debug keystore, to allow debug builds from CI to be upgradable
+        create("all") {
+            storeFile = rootProject.file("app/signkey.keystore")
+            storePassword = "A123456!"
+            keyAlias = "key0"
+            keyPassword = "A123456!"
+        }
+    }
 
     buildTypes {
         getByName("debug") {
-         //   signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("all")
         }
-
         getByName("release") {
             isMinifyEnabled = true
-        //    signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("all")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro")
         }
@@ -81,8 +81,8 @@ android {
         }
         create("prod") {
             dimension = "environment"
-            applicationIdSuffix = ".prod"
-            versionNameSuffix = "-prod"
+            applicationIdSuffix = ""
+            versionNameSuffix = ""
             buildConfigField("String", "API_BASE_URL", "\"https://x.x.x.com/v1/prod\"")
         }
     }
@@ -184,6 +184,9 @@ dependencies {
 
     val timberVersion = rootProject.extra["timber_version"]
     implementation("com.jakewharton.timber:timber:$timberVersion")
+
+    implementation(platform("com.google.firebase:firebase-bom:31.2.2"))
+
 
     // Static code analysis
     detekt("io.gitlab.arturbosch.detekt:detekt-cli:1.22.0")
