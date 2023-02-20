@@ -10,9 +10,9 @@ jobs:
 
     steps:
       - uses: ruby/setup-ruby@v1
-          with:
-            ruby-version: '3.0' # Not needed with a .ruby-version file
-            bundler-cache: true
+        with:
+          ruby-version: '3.0' # Not needed with a .ruby-version file
+          bundler-cache: true
 
       - name: Checkout the code
         uses: actions/checkout@v2
