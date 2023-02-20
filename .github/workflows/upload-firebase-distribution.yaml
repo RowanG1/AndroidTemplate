@@ -25,6 +25,6 @@ jobs:
             FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_APP_DISTRIBUTION_KEY }}
 
       - name: Distribute app with 🔥 App Distribution 🚀
-        run: fastlane distribute
+        run: bundle exec fastlane distribute
         env:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
