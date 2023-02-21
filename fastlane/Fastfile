@@ -21,7 +21,7 @@ platform :android do
     lane :distribute do
         gradle(
           task: "assemble",
-          flavor: "prod",
+          flavor: "dev",
           build_type: "Release",
           properties: {
             "versionCodeArg": ENV['BUILD_NUMBER']
