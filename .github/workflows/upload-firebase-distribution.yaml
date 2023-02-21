@@ -29,4 +29,3 @@ jobs:
         run: bundle exec fastlane distribute
         env:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
-          BUILD_NUMBER: ${{ github.run_number }}
