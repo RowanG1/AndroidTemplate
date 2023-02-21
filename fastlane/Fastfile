@@ -27,6 +27,8 @@ platform :android do
             "versionCodeArg": ENV['BUILD_NUMBER']
           }
         )
+        puts "Build number in fastfile:"
+        puts ENV['BUILD_NUMBER']
         firebase_app_distribution(
             service_credentials_file: "firebase_credentials.json",
             app: ENV['FIREBASE_APP_ID'],
