@@ -24,12 +24,13 @@ val detektTask = tasks.register<JavaExec>("detekt") {
 }
 
 android {
+    val versionCodeArg: String? by project
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         applicationId = "com.example.myapplication"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 1
+        versionCode = versionCodeArg?.toInt() ?: 1
         versionName = "1.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

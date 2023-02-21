@@ -22,7 +22,10 @@ platform :android do
         gradle(
           task: "assemble",
           flavor: "prod",
-          build_type: "Release"
+          build_type: "Release",
+          properties: {
+            "versionCodeArg": ENV['BUILD_NUMBER']
+          }
         )
         firebase_app_distribution(
             service_credentials_file: "firebase_credentials.json",
