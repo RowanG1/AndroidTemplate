@@ -3,7 +3,7 @@ name: Distribute
 on:
   push:
     branches:
-      - qa
+      - main
 
 jobs:
   distribute:
