@@ -24,6 +24,7 @@ val detektTask = tasks.register<JavaExec>("detekt") {
 }
 
 android {
+    namespace = "com.example.myapplication"
     val versionCodeArg: String? by project
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
@@ -60,8 +61,10 @@ android {
         getByName("release") {
             isMinifyEnabled = true
             signingConfig = signingConfigs.getByName("all")
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -140,9 +143,6 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
-    implementation(libs.accompanist.swiperefresh)
-    implementation(libs.accompanist.systemuicontroller)
-
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.core.ktx)
@@ -158,16 +158,7 @@ dependencies {
 
     implementation(libs.google.android.material)
 
-    androidTestImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.core)
-    androidTestImplementation(libs.androidx.test.runner)
-    androidTestImplementation(libs.androidx.test.espresso.core)
-    androidTestImplementation(libs.androidx.test.rules)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.kotlinx.coroutines.test)
-    androidTestImplementation(libs.androidx.compose.ui.test)
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-
+    // Hilt
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
@@ -177,17 +168,17 @@ dependencies {
     val retrofitVersion = rootProject.extra["retrofit_version"]
     val gsonVersion = rootProject.extra["gson_version"]
     val httpLoggingVersion = rootProject.extra["httplogging_version"]
-
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
     implementation("com.squareup.okhttp3:logging-interceptor:$httpLoggingVersion")
     implementation("com.google.code.gson:gson:$gsonVersion")
 
+    // Logging
     val timberVersion = rootProject.extra["timber_version"]
     implementation("com.jakewharton.timber:timber:$timberVersion")
 
+    // Firebase - including app distribution
     implementation(platform("com.google.firebase:firebase-bom:31.2.2"))
-
 
     // Static code analysis
     detekt("io.gitlab.arturbosch.detekt:detekt-cli:1.22.0")
@@ -204,6 +195,16 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+
+    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.core)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.androidx.compose.ui.test)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
 }
 
 kapt {
@@ -215,6 +216,7 @@ tasks.withType<Test> {
     systemProperties.put("robolectric.logging", "stdout")
 }
 
+// Enhanced logging for unit tests
 tasks.withType<Test>().configureEach {
     testLogging {
         lifecycle {

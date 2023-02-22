@@ -2,8 +2,7 @@ name: Distribute
 
 on:
   push:
-    branches:
-      - qa
+    branches: [ ]
 
 jobs:
   distribute:
