@@ -18,11 +18,11 @@ jobs:
           bundler-cache: true
 
       - name: Create Google Play Store Credentials file
-          run: |
-            echo "GOOGLE_PLAY_STORE_KEY" > play_store_credentials.json.b64
-            base64 -d -i play_store_credentials.json.b64 > play_store_credentials.json
-          env:
-            GOOGLE_PLAY_STORE_KEY: ${{ secrets.GOOGLE_PLAY_STORE_KEY }}
+        run: |
+          echo "GOOGLE_PLAY_STORE_KEY" > play_store_credentials.json.b64
+          base64 -d -i play_store_credentials.json.b64 > play_store_credentials.json
+        env:
+          GOOGLE_PLAY_STORE_KEY: ${{ secrets.GOOGLE_PLAY_STORE_KEY }}
 
       - name: Upload to Play Store 🚀
         run: bundle exec fastlane distribute
