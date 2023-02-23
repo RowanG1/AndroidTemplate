@@ -28,10 +28,10 @@ android {
     val versionCodeArg: String? by project
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
-        applicationId = "com.example.myapplication"
+        applicationId = "com.rowang.androidtemplate"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = versionCodeArg?.toInt() ?: 1
+        versionCode = versionCodeArg?.toInt() ?: 2
         versionName = "1.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
