@@ -25,6 +25,6 @@ jobs:
           GOOGLE_PLAY_STORE_KEY: ${{ secrets.GOOGLE_PLAY_STORE_KEY }}
 
       - name: Upload to Play Store 🚀
-        run: bundle exec fastlane distribute
+        run: bundle exec fastlane playstore
         env:
           BUILD_NUMBER: ${{ github.run_number }}
