@@ -48,6 +48,7 @@ platform :android do
         upload_to_play_store(
             package_name: "com.rowang.androidtemplate",
             track: "internal",
+            release_status: 'draft',
             json_key: "play_store_credentials.json",
             aab: lane_context[SharedValues::GRADLE_AAB_OUTPUT_PATH]
         )
