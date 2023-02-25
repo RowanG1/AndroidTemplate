@@ -1,6 +1,7 @@
 package com.example.myapplication.di
 
 import com.example.myapplication.data.networking.ApiService
+import com.example.myapplication.data.networking.NetworkInterceptor
 import com.example.myapplication.data.repositories.CountryRepoImpl
 import com.example.myapplication.domain.repositories.CountryRepo
 import dagger.Binds
@@ -31,10 +32,15 @@ abstract class  ApiModule {
 
         @Singleton
         @Provides
-        fun providesOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
+        fun providesHNetworkInterceptor() = NetworkInterceptor()
+
+        @Singleton
+        @Provides
+        fun providesOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor, networkInterceptor: NetworkInterceptor): OkHttpClient =
             OkHttpClient
                 .Builder()
                 .addInterceptor(httpLoggingInterceptor)
+                .addInterceptor(networkInterceptor)
                 .build()
 
         @Singleton

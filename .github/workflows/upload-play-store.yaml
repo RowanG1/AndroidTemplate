@@ -2,7 +2,7 @@ name: Upload play store
 
 on:
   push:
-    branches: [ main ]
+    branches: [ release ]
 
 jobs:
   playstore:

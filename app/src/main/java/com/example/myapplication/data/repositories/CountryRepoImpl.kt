@@ -14,7 +14,7 @@ class CountryRepoImpl @Inject constructor(private val apiService: ApiService) : 
         emit(Result.Loading)
         try {
             Timber.i("Base URL is: ${BuildConfig.API_BASE_URL}")
-            //  val result = apiService.getCountries()
+            val result = apiService.getCountries()
             emit(Result.Success(listOf(Country("Austria"), Country("Sweden"))))
         } catch (e: Exception) {
             emit(Result.Error(e))
