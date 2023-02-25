@@ -25,11 +25,11 @@ jobs:
           GOOGLE_PLAY_STORE_KEY: ${{ secrets.GOOGLE_PLAY_STORE_KEY }}
 
       - name: Create Signing key file
-          run: |
-            echo "$SIGNING_KEY" > signing_key.json.b64
-            base64 -d -i signing_key.json.b64 > signkey.keystore
-          env:
-            SIGNING_KEY: ${{ secrets.UPLOAD_KEY_STORE }}
+        run: |
+          echo "$SIGNING_KEY" > signing_key.keystore.b64
+          base64 -d -i signing_key.keystore.b64 > signkey.keystore
+        env:
+          SIGNING_KEY: ${{ secrets.UPLOAD_KEY_STORE }}
 
       - name: Upload to Play Store 🚀
         run: bundle exec fastlane playstore
