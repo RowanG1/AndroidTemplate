@@ -36,6 +36,6 @@ jobs:
         env:
           BUILD_NUMBER: ${{ github.run_number }}
           STORE_FILE: "signkey.keystore"
-          STORE_PASSWORD: {{ secrets.UPLOAD_KEY_STORE_PASSWORD }}
-          KEY_ALIAS: {{ secrets.UPLOAD_KEY_ALIAS }}
-          KEY_PASSWORD: {{ secrets.UPLOAD_KEY_PASSWORD }}
+          STORE_PASSWORD: ${{ secrets.UPLOAD_KEY_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.UPLOAD_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.UPLOAD_KEY_PASSWORD }}
