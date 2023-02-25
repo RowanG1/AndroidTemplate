@@ -44,23 +44,25 @@ android {
         }
     }
 
+    val storeFileArg: String? by project
+    val storePasswordArg: String? by project
+    val keyAliasArg: String? by project
+    val KeyPasswordArg: String? by project
     signingConfigs {
         // We use a bundled debug keystore, to allow debug builds from CI to be upgradable
-        create("all") {
-            storeFile = rootProject.file("app/signkey.keystore")
-            storePassword = "A123456!"
-            keyAlias = "key0"
-            keyPassword = "A123456!"
+        create("release") {
+            storeFile = rootProject.file(storeFileArg ?: "dummyFallback")
+            storePassword = storePasswordArg ?: ""
+            keyAlias = keyAliasArg ?: ""
+            keyPassword = KeyPasswordArg ?: ""
         }
     }
 
     buildTypes {
-        getByName("debug") {
-            signingConfig = signingConfigs.getByName("all")
-        }
+
         getByName("release") {
             isMinifyEnabled = true
-            signingConfig = signingConfigs.getByName("all")
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
