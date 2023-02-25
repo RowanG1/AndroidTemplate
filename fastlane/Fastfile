@@ -42,11 +42,11 @@ platform :android do
             flavor: "prod",
             build_type: "Release",
             properties: {
-                "versionCodeArg": ENV['BUILD_NUMBER'],
-                "storeFile" : ENV['STORE_FILE'],
-                "storePassword": ENV['STORE_PASSWORD'],
-                "keyAlias": ENV['KEY_ALIAS'],
-                "keyPassword": ENV['KEY_PASSWORD']
+                "versionCodeArg" => ENV['BUILD_NUMBER'],
+                "storeFile" => ENV['STORE_FILE'],
+                "storePassword" => ENV['STORE_PASSWORD'],
+                "keyAlias" => ENV['KEY_ALIAS'],
+                "keyPassword" => ENV['KEY_PASSWORD']
              }
         )
         upload_to_play_store(
