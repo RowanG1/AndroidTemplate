@@ -47,22 +47,27 @@ class HomeViewModelTest {
             }
         )
 
-        val viewModel = HomeViewModel(countryRepo, UnconfinedTestDispatcher(testScheduler))
+        val viewModel by lazy {
+            HomeViewModel(
+                countryRepo,
+                UnconfinedTestDispatcher(testScheduler)
+            )
+        }
 
         val emitted = mutableListOf<HomeViewModelState>()
         val collectJob = launch(UnconfinedTestDispatcher(testScheduler)) {
             viewModel.uiState.toList(emitted)
         }
 
-        viewModel.init()
-
         advanceTimeBy(50)
 
-        assertEquals(listOf(
-            HomeViewModelState(),
-            HomeViewModelState(Result.Loading),
-            HomeViewModelState(Result.Success(data = listOf(Country("Sweden"))))
-        ), emitted)
+        assertEquals(
+            listOf(
+                HomeViewModelState(),
+                HomeViewModelState(Result.Loading),
+                HomeViewModelState(Result.Success(data = listOf(Country("Sweden"))))
+            ), emitted
+        )
 
         collectJob.cancel()
     }

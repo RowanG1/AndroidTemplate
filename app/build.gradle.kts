@@ -82,7 +82,7 @@ android {
         create("dev") {
             dimension = "environment"
             applicationIdSuffix = ".dev"
-            buildConfigField("String", "API_BASE_URL", "\"x.x.x.com/v1/dev\"")
+            buildConfigField("String", "API_BASE_URL", "\"https://www.cnn.com\"")
             versionNameSuffix = "-dev"
         }
         create("prod") {
@@ -124,6 +124,8 @@ android {
         excludes += "/META-INF/AL2.0"
         excludes += "/META-INF/LGPL2.1"
     }
+
+    kotlinOptions.jvmTarget = "1.8"
 }
 
 dependencies {
@@ -197,6 +199,11 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.10")
+
+    debugImplementation("com.github.chuckerteam.chucker:library:3.5.2")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:3.5.2")
 
     androidTestImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.core)

@@ -29,7 +29,7 @@ class HomeViewModel @Inject constructor(private val repository: CountryRepo, val
             viewModelState.value
         )
 
-    fun init () {
+    init {
         fetchCountries()
     }
 

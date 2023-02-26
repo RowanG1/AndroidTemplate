@@ -28,7 +28,6 @@ fun NavGraph(
     ) {
         composable(Destinations.HOME_ROUTE) {
             val homeViewModel: HomeViewModel = hiltViewModel()
-            homeViewModel.init()
 
             HomeRoute(
                 homeViewModel = homeViewModel,
