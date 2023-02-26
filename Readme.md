@@ -1,3 +1,6 @@
+A basic template for Android Projects.
+[Under construction- not recommended to use as is.]
+
 To update the dependencies version catalog, run command:
 ./gradlew versionCatalogUpdate
 
